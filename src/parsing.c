@@ -13,7 +13,7 @@ int parse_arguments(int argc, char **argv)
     
     // Check .cub file extension
     extension = ft_strrchr(argv[1], '.');
-    if (!extension || ft_strncmp(extension, ".cub", 4) != 0)
+    if (!extension || ft_strncmp(extension, ".cub", 5) != 0) // <--- this should be 5 to check for NULL termination
     {
         printf(ERR_FILE_EXT);
         return (0);
