@@ -1,42 +1,17 @@
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include "../Libft/libft.h"
-#include "../MLX42/include/MLX42/MLX42.h"
-
-// Map characters
-#define WALL '1'
-#define EMPTY '0'
-#define NORTH 'N'
-#define SOUTH 'S'
-#define EAST 'E'
-#define WEST 'W'
-
-// Window settings
-#define WIN_WIDTH 1024
-#define WIN_HEIGHT 768
-
-// Math constants
-#define PI 3.14159265359
-
-// Error messages
-#define ERR_ARGC "Error\nWrong number of arguments\n"
-#define ERR_FILE_EXT "Error\nFile must have .cub extension\n"
-#define ERR_FILE_OPEN "Error\nCannot open file\n"
-#define ERR_FILE_READ "Error\nCannot read file\n"
-#define ERR_MALLOC "Error\nMemory allocation failed\n"
-#define ERR_TEXTURE "Error\nInvalid texture path\n"
-#define ERR_COLOR "Error\nInvalid color value\n"
-#define ERR_MAP "Error\nInvalid map\n"
-#define ERR_PLAYER "Error\nInvalid player position\n"
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <math.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include "../Libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "defines.h"
 
 // Color structure (RGB)
 typedef struct s_color
@@ -49,19 +24,19 @@ typedef struct s_color
 // Texture structure
 typedef struct s_texture
 {
-	char		*path;
+	char			*path;
 	mlx_texture_t	*texture;
 }	t_texture;
 
 // Player structure
 typedef struct s_player
 {
-	double	x;		// Player x position
-	double	y;		// Player y position
-	double	dir_x;	// Direction vector x
-	double	dir_y;	// Direction vector y
-	double	plane_x;	// Camera plane x
-	double	plane_y;	// Camera plane y
+	double	x;				// Player x position
+	double	y;				// Player y position
+	double	dir_x;			// Direction vector x
+	double	dir_y;			// Direction vector y
+	double	plane_x;		// Camera plane x
+	double	plane_y;		// Camera plane y
 	char	orientation;	// Starting orientation (N, S, E, W)
 }	t_player;
 
@@ -69,8 +44,8 @@ typedef struct s_player
 typedef struct s_map
 {
 	char	**grid;		// 2D map grid
-	int	width;		// Map width
-	int	height;		// Map height
+	int	width;			// Map width
+	int	height;			// Map height
 }	t_map;
 
 // Game state structure
