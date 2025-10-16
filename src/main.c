@@ -45,6 +45,24 @@ int main(int argc, char **argv)
     printf("✓ Player found at position (%.1f, %.1f) facing %c\n", 
            game.player.x, game.player.y, game.player.orientation);
     
+    // Phase 3: Graphics Initialization
+    printf("\n🎮 Initializing graphics...\n");
+    if (!init_graphics(&game))
+    {
+        cleanup_game(&game);
+        return (1);
+    }
+    printf("✓ Graphics initialized!\n");
+    printf("✓ Window created: %dx%d\n", WIN_WIDTH, WIN_HEIGHT);
+    printf("✓ Textures loaded successfully!\n");
+    
+    // Phase 3: Start game loop
+    printf("\n🚀 Starting game...\n");
+    printf("Controls: ESC to exit\n");
+    start_game_loop(&game);
+    
+    // Cleanup
+    cleanup_graphics(&game);
     cleanup_game(&game);
     return (0);
 }

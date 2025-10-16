@@ -3,7 +3,8 @@ CC = cc
 CFLAG = -Wall -Werror -Wextra
 SRC_PATH = src/
 OBJ_PATH = obj/
-SRC = main.c parsing.c texture_color_parsing.c map_parsing.c
+SRC = main.c parsing.c texture_color_parsing.c map_parsing.c \
+      graphics_init.c rendering.c game_loop.c raycasting.c
 LIBFT = Libft/libft.a
 INCS	= -I ./include/ -IMLX42/include
 SRCS	= $(addprefix $(SRC_PATH), $(SRC))
