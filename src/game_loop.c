@@ -13,6 +13,9 @@ void	game_loop(void *param)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	
+	// Handle player input (movement and rotation)
+	handle_input(game);
+	
 	// Render the frame
 	render_frame(game);
 }

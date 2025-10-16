@@ -174,4 +174,14 @@ void	calculate_wall_height(t_ray *ray);
 void	calculate_texture_coords(t_game *game, t_ray *ray);
 int	get_texture_index(t_ray *ray);
 
+// Input handling functions
+void	handle_input(t_game *game);
+int	is_valid_position(t_game *game, double x, double y);
+void	move_forward(t_game *game, double move_speed);
+void	move_backward(t_game *game, double move_speed);
+void	strafe_left(t_game *game, double move_speed);
+void	strafe_right(t_game *game, double move_speed);
+void	rotate_left(t_game *game, double rot_speed);
+void	rotate_right(t_game *game, double rot_speed);
+
 #endif

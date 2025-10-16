@@ -58,7 +58,11 @@ int main(int argc, char **argv)
     
     // Phase 3: Start game loop
     printf("\n🚀 Starting game...\n");
-    printf("Controls: ESC to exit\n");
+    printf("Controls:\n");
+    printf("  W/S     - Move forward/backward\n");
+    printf("  A/D     - Strafe left/right\n");
+    printf("  ←/→     - Rotate camera\n");
+    printf("  ESC     - Exit\n");
     start_game_loop(&game);
     
     // Cleanup
