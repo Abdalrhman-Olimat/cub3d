@@ -247,29 +247,90 @@ int is_wall_or_void(t_game *game, int x, int y)
 }
 
 // Flood fill to check if map is properly enclosed
+// This checks if any reachable position from (x,y) touches a space at the boundary
 int flood_fill_check(t_game *game, char **visited, int x, int y)
 {
-    // Out of bounds - map is not enclosed
+    // Out of bounds
     if (x < 0 || x >= game->map.width || y < 0 || y >= game->map.height)
         return (0);
     
-    // Already visited or wall
+    // Already visited or it's a wall
     if (visited[y][x] || game->map.grid[y][x] == WALL)
         return (1);
     
-    // Mark as visited
+    // Mark current position as visited
     visited[y][x] = 1;
     
-    // If we hit a space at the edge, map is not enclosed
-    if ((x == 0 || x == game->map.width - 1 || y == 0 || y == game->map.height - 1) 
-        && game->map.grid[y][x] == ' ')
-        return (0);
+    // If current position is a space character
+    if (game->map.grid[y][x] == ' ')
+    {
+        // If this space is at the map boundary, the map is NOT properly enclosed
+        if (x == 0 || x == game->map.width - 1 || y == 0 || y == game->map.height - 1)
+            return (0);
+        
+        // Check all adjacent positions (recursively)
+        return (flood_fill_check(game, visited, x + 1, y) &&
+                flood_fill_check(game, visited, x - 1, y) &&
+                flood_fill_check(game, visited, x, y + 1) &&
+                flood_fill_check(game, visited, x, y - 1));
+    }
     
-    // Recursively check all directions
-    return (flood_fill_check(game, visited, x + 1, y) &&
-            flood_fill_check(game, visited, x - 1, y) &&
-            flood_fill_check(game, visited, x, y + 1) &&
-            flood_fill_check(game, visited, x, y - 1));
+    // If current position is empty floor (0)
+    if (game->map.grid[y][x] == EMPTY)
+    {
+        // Empty floor cannot be at the boundary
+        if (x == 0 || x == game->map.width - 1 || y == 0 || y == game->map.height - 1)
+            return (0);
+        
+        // Check all 4 adjacent positions
+        // Any adjacent space or empty floor must also be properly enclosed
+        return (flood_fill_check(game, visited, x + 1, y) &&
+                flood_fill_check(game, visited, x - 1, y) &&
+                flood_fill_check(game, visited, x, y + 1) &&
+                flood_fill_check(game, visited, x, y - 1));
+    }
+    
+    return (1);
+}
+
+// Flood fill from player to mark all reachable empty floor tiles
+void mark_reachable_floors(t_game *game, char **visited, int x, int y)
+{
+    // Out of bounds or already visited
+    if (x < 0 || x >= game->map.width || y < 0 || y >= game->map.height)
+        return;
+    
+    if (visited[y][x])
+        return;
+    
+    // Only traverse empty floors
+    if (game->map.grid[y][x] != EMPTY)
+        return;
+    
+    // Mark as reachable
+    visited[y][x] = 1;
+    
+    // Recursively check all 4 directions
+    mark_reachable_floors(game, visited, x + 1, y);
+    mark_reachable_floors(game, visited, x - 1, y);
+    mark_reachable_floors(game, visited, x, y + 1);
+    mark_reachable_floors(game, visited, x, y - 1);
+}
+
+// Check if a position has an adjacent space
+int has_adjacent_space(t_game *game, int x, int y)
+{
+    // Check all 4 adjacent positions
+    if (x + 1 < game->map.width && game->map.grid[y][x + 1] == ' ')
+        return (1);
+    if (x - 1 >= 0 && game->map.grid[y][x - 1] == ' ')
+        return (1);
+    if (y + 1 < game->map.height && game->map.grid[y + 1][x] == ' ')
+        return (1);
+    if (y - 1 >= 0 && game->map.grid[y - 1][x] == ' ')
+        return (1);
+    
+    return (0);
 }
 
 // Check if map is surrounded by walls
@@ -277,9 +338,8 @@ int check_walls(t_game *game)
 {
     char **visited;
     int i, j;
-    int result;
     
-    // Create visited array
+    // Create visited array to track reachable floors
     visited = malloc(sizeof(char *) * game->map.height);
     if (!visited)
         return (0);
@@ -298,26 +358,50 @@ int check_walls(t_game *game)
         i++;
     }
     
-    // Start flood fill from player position
-    result = flood_fill_check(game, visited, (int)game->player.x, (int)game->player.y);
+    // Mark all empty floors reachable from player position
+    mark_reachable_floors(game, visited, (int)game->player.x, (int)game->player.y);
     
-    // Check that all reachable empty spaces are enclosed
-    if (result)
+    // Check if any reachable empty floor is adjacent to a space or at the boundary
+    i = 0;
+    while (i < game->map.height)
     {
-        i = 0;
-        while (i < game->map.height && result)
+        j = 0;
+        while (j < game->map.width)
         {
-            j = 0;
-            while (j < game->map.width && result)
+            if (visited[i][j])
             {
-                if (game->map.grid[i][j] == EMPTY && !visited[i][j])
+                // If this floor is at the map boundary, it's invalid
+                if (i == 0 || i == game->map.height - 1 || 
+                    j == 0 || j == game->map.width - 1)
                 {
-                    result = flood_fill_check(game, visited, j, i);
+                    // Free visited array
+                    int k = 0;
+                    while (k < game->map.height)
+                    {
+                        free(visited[k]);
+                        k++;
+                    }
+                    free(visited);
+                    return (0);
                 }
-                j++;
+                
+                // If this floor is adjacent to a space, map is invalid
+                if (has_adjacent_space(game, j, i))
+                {
+                    // Free visited array
+                    int k = 0;
+                    while (k < game->map.height)
+                    {
+                        free(visited[k]);
+                        k++;
+                    }
+                    free(visited);
+                    return (0);
+                }
             }
-            i++;
+            j++;
         }
+        i++;
     }
     
     // Free visited array
@@ -329,7 +413,7 @@ int check_walls(t_game *game)
     }
     free(visited);
     
-    return (result);
+    return (1);
 }
 
 // Phase 2E: Map Validation

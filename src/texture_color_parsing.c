@@ -163,6 +163,11 @@ int parse_textures_and_colors(t_game *game)
         // Parse North texture
         if (ft_strncmp(line, "NO ", 3) == 0)
         {
+            if (game->textures[0].path)
+            {
+                printf("Error\nDuplicate texture definition: NO\n");
+                return (0);
+            }
             if (!parse_texture(line, &game->textures[0], "NO"))
                 return (0);
             texture_count++;
@@ -170,6 +175,11 @@ int parse_textures_and_colors(t_game *game)
         // Parse South texture
         else if (ft_strncmp(line, "SO ", 3) == 0)
         {
+            if (game->textures[1].path)
+            {
+                printf("Error\nDuplicate texture definition: SO\n");
+                return (0);
+            }
             if (!parse_texture(line, &game->textures[1], "SO"))
                 return (0);
             texture_count++;
@@ -177,6 +187,11 @@ int parse_textures_and_colors(t_game *game)
         // Parse West texture
         else if (ft_strncmp(line, "WE ", 3) == 0)
         {
+            if (game->textures[2].path)
+            {
+                printf("Error\nDuplicate texture definition: WE\n");
+                return (0);
+            }
             if (!parse_texture(line, &game->textures[2], "WE"))
                 return (0);
             texture_count++;
@@ -184,6 +199,11 @@ int parse_textures_and_colors(t_game *game)
         // Parse East texture
         else if (ft_strncmp(line, "EA ", 3) == 0)
         {
+            if (game->textures[3].path)
+            {
+                printf("Error\nDuplicate texture definition: EA\n");
+                return (0);
+            }
             if (!parse_texture(line, &game->textures[3], "EA"))
                 return (0);
             texture_count++;
@@ -191,6 +211,11 @@ int parse_textures_and_colors(t_game *game)
         // Parse Floor color
         else if (line[0] == 'F' && (line[1] == ' ' || line[1] == '\t'))
         {
+            if (floor_set)
+            {
+                printf("Error\nDuplicate floor color definition\n");
+                return (0);
+            }
             if (!parse_color(line, &game->floor_color, 'F'))
                 return (0);
             floor_set = 1;
@@ -198,6 +223,11 @@ int parse_textures_and_colors(t_game *game)
         // Parse Ceiling color
         else if (line[0] == 'C' && (line[1] == ' ' || line[1] == '\t'))
         {
+            if (ceiling_set)
+            {
+                printf("Error\nDuplicate ceiling color definition\n");
+                return (0);
+            }
             if (!parse_color(line, &game->ceiling_color, 'C'))
                 return (0);
             ceiling_set = 1;

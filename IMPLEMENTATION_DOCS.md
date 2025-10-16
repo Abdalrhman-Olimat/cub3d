@@ -449,12 +449,49 @@ As of the latest run:
 2. **Directory Path Validation**: Added check to ensure texture paths point to regular files, not directories
 3. **File Extension Validation**: Added validation for proper texture file extensions (.xmp, .png, .jpg, .jpeg)
 4. **Memory Safety**: Fixed segmentation fault in map parsing for invalid characters
+5. **Duplicate Detection**: Added checks to prevent duplicate texture/color definitions and memory leaks
 
 ### Quality Assurance Achievements
-- **Zero Memory Leaks**: All allocated memory is properly freed
+- **Zero Memory Leaks**: All allocated memory is properly freed (validated with valgrind)
 - **Crash-Free**: No segmentation faults or undefined behavior
 - **Comprehensive Error Reporting**: Clear, specific error messages for all failure cases
-- **Edge Case Coverage**: Handles empty files, missing files, invalid formats, etc.
+- **Edge Case Coverage**: Handles empty files, missing files, invalid formats, duplicate definitions, etc.
+- **Duplicate Prevention**: Detects and rejects duplicate texture paths and color definitions
+
+### Enhanced Map Validation Logic
+
+Our implementation uses a **reachability-based validation** strategy to ensure the playable area is properly enclosed:
+
+**Validation Algorithm:**
+1. **Flood-Fill from Player**: Starting from the player's position, we mark all empty floor tiles (`0`) that are reachable
+2. **Boundary Check**: We verify that no reachable tile is at the map boundary (edges of the grid)
+3. **Space Adjacency Check**: We verify that no reachable tile is adjacent to a space (` `) character
+
+**Why This Works:**
+- Spaces (` `) represent **void/non-walkable areas** in the map
+- If a reachable `0` tile is adjacent to a space, the player could theoretically access the void
+- If a reachable `0` tile is at the boundary, the player could "walk off" the map
+- This ensures **the playable area around the player is completely surrounded by walls (`1`)**
+
+**Examples:**
+```
+VALID: Player area fully enclosed
+1111  111
+1001  101
+1001  1N1
+1111  111
+
+INVALID: Reachable area touches void spaces
+1111  111
+100       01  ← Empty floors can reach spaces
+1001  1N1
+1111  111
+
+INVALID: Reachable area at boundary
+000000000
+000N00000  ← Player area extends to edges
+000000000
+```
 
 ### Memory Safety Testing
 - Fixed segmentation fault in map parsing when invalid characters are detected
