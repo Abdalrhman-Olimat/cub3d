@@ -1,6 +1,11 @@
 #include "../include/cub3d.h"
 
-// Phase 2A: Command Line Arguments validation
+/*
+P2A:
+Parse command line arguments to
+make sure there is exactly one argument (the .cub file)
+check that the file has a .cub extension
+*/
 int parse_arguments(int argc, char **argv)
 {
     char *extension;
@@ -10,27 +15,55 @@ int parse_arguments(int argc, char **argv)
         printf(ERR_ARGC);
         return (0);
     }
-    
-    // Check .cub file extension
     extension = ft_strrchr(argv[1], '.');
     if (!extension || ft_strncmp(extension, ".cub", 4) != 0)
     {
         printf(ERR_FILE_EXT);
         return (0);
     }
-    
     return (1);
 }
 
 // Phase 2B: File Reading & Basic Parsing
+/*
+Helper function to add a line to the content array
+*/
+static char **add_line_to_content(char **content, char *line, int line_count)
+{
+    char **temp;
+    int i;
+    
+    temp = malloc(sizeof(char *) * (line_count + 2));
+    if (!temp)
+    {
+        free_array(content);
+        free(line);
+        printf(ERR_MALLOC);
+        return (NULL);
+    }
+    i = 0;
+    while (i < line_count && content)
+    {
+        temp[i] = content[i];
+        i++;
+    }
+    if (line[ft_strlen(line) - 1] == '\n')
+        line[ft_strlen(line) - 1] = '\0';
+    temp[line_count] = line;
+    temp[line_count + 1] = NULL;
+    free(content);
+    return (temp);
+}
+
+/*
+Read file and store content in array
+*/
 char **read_file(char *filename)
 {
     int fd;
     char *line;
     char **content;
-    char **temp;
     int line_count;
-    int i;
     
     fd = open(filename, O_RDONLY);
     if (fd < 0)
@@ -38,55 +71,32 @@ char **read_file(char *filename)
         printf(ERR_FILE_OPEN);
         return (NULL);
     }
-    
     content = NULL;
     line_count = 0;
-    
-    // Read file line by line
     while ((line = get_next_line(fd)) != NULL)
     {
-        // Allocate/reallocate array for new line
-        temp = malloc(sizeof(char *) * (line_count + 2));
-        if (!temp)
+        content = add_line_to_content(content, line, line_count);
+        if (!content)
         {
-            free_array(content);
-            free(line);
             close(fd);
-            printf(ERR_MALLOC);
             return (NULL);
         }
-        
-        // Copy existing lines
-        i = 0;
-        while (i < line_count && content)
-        {
-            temp[i] = content[i];
-            i++;
-        }
-        
-        // Add new line (remove newline character)
-        if (line[ft_strlen(line) - 1] == '\n')
-            line[ft_strlen(line) - 1] = '\0';
-        temp[line_count] = line;
-        temp[line_count + 1] = NULL;
-        
-        free(content);
-        content = temp;
         line_count++;
     }
-    
     close(fd);
-    
-    // Handle empty file
     if (line_count == 0)
     {
         printf("Error\nEmpty file or file reading failed\n");
         return (NULL);
     }
-    
     return (content);
 }
 
+/*
+Phase 2B: File Reading & Basic Parsing
+- Read the .cub file line by line
+- Store each line in a dynamically allocated array of strings in the game structure
+*/
 int parse_file(char *filename, t_game *game)
 {
     game->file_content = read_file(filename);

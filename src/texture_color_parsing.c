@@ -85,6 +85,30 @@ int validate_rgb(int r, int g, int b)
     return (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255);
 }
 
+// Validate that all required textures and colors are set
+static int validate_textures_and_colors(int texture_count, int floor_set, int ceiling_set)
+{
+    if (texture_count != 4)
+    {
+        printf("Error\nMissing texture definitions (need NO, SO, WE, EA)\n");
+        return (0);
+    }
+    
+    if (!floor_set)
+    {
+        printf("Error\nMissing floor color definition (F)\n");
+        return (0);
+    }
+    
+    if (!ceiling_set)
+    {
+        printf("Error\nMissing ceiling color definition (C)\n");
+        return (0);
+    }
+    
+    return (1);
+}
+
 // Parse color line (F or C)
 int parse_color(char *line, t_color *color, char identifier)
 {
@@ -236,29 +260,9 @@ int parse_textures_and_colors(t_game *game)
         else if (line[0] == '1' || line[0] == '0')
         {
             break;
-        }
-        
+        }   
         i++;
     }
-    
     // Check if all textures and colors are set
-    if (texture_count != 4)
-    {
-        printf("Error\nMissing texture definitions (need NO, SO, WE, EA)\n");
-        return (0);
-    }
-    
-    if (!floor_set)
-    {
-        printf("Error\nMissing floor color definition (F)\n");
-        return (0);
-    }
-    
-    if (!ceiling_set)
-    {
-        printf("Error\nMissing ceiling color definition (C)\n");
-        return (0);
-    }
-    
-    return (1);
+    return (validate_textures_and_colors(texture_count, floor_set, ceiling_set));
 }

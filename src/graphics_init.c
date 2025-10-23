@@ -28,8 +28,6 @@ int	init_image(t_game *game)
 		mlx_terminate(game->mlx);
 		return (0);
 	}
-	
-	// Display the image in the window
 	if (mlx_image_to_window(game->mlx, game->img, 0, 0) == -1)
 	{
 		printf("Error\nFailed to display image\n");
@@ -37,7 +35,6 @@ int	init_image(t_game *game)
 		mlx_terminate(game->mlx);
 		return (0);
 	}
-	
 	return (1);
 }
 
@@ -69,7 +66,6 @@ int	load_textures(t_game *game)
 	{
 		if (!load_texture(game, &game->textures[i]))
 		{
-			// Clean up already loaded textures
 			while (--i >= 0)
 			{
 				if (game->textures[i].texture)
@@ -100,6 +96,5 @@ int	init_graphics(t_game *game)
 		mlx_terminate(game->mlx);
 		return (0);
 	}
-	
 	return (1);
 }

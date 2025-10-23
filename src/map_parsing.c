@@ -23,14 +23,12 @@ int find_map_start(t_game *game)
     while (game->file_content[i])
     {
         line = skip_whitespace(game->file_content[i]);
-        
         // Skip empty lines
         if (!*line)
         {
             i++;
             continue;
         }
-        
         // Skip texture and color lines
         if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0 ||
             ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0 ||
@@ -39,16 +37,11 @@ int find_map_start(t_game *game)
             i++;
             continue;
         }
-        
         // If we hit a line that could be part of the map
         if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
-        {
             return (i);
-        }
-        
         i++;
     }
-    
     return (-1);
 }
 
@@ -178,29 +171,23 @@ int find_player(t_game *game)
                 game->player.x = (double)j + 0.5;
                 game->player.y = (double)i + 0.5;
                 game->player.orientation = game->map.grid[i][j];
-                
-                // Replace player character with empty space
                 game->map.grid[i][j] = EMPTY;
-                
                 player_count++;
             }
             j++;
         }
         i++;
     }
-    
     if (player_count == 0)
     {
         printf("Error\nNo player starting position found\n");
         return (0);
     }
-    
     if (player_count > 1)
     {
         printf("Error\nMultiple player starting positions found\n");
         return (0);
     }
-    
     return (1);
 }
 
