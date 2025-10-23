@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 CC = cc
 CFLAG = -Wall -Werror -Wextra
 SRC_PATH = src/
