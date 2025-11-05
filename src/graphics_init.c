@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphics_init.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/05 14:20:17 by aeleimat          #+#    #+#             */
+/*   Updated: 2025/11/05 14:21:15 by aeleimat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 /**
@@ -86,10 +98,8 @@ int	init_graphics(t_game *game)
 {
 	if (!init_mlx(game))
 		return (0);
-	
 	if (!init_image(game))
 		return (0);
-	
 	if (!load_textures(game))
 	{
 		mlx_delete_image(game->mlx, game->img);

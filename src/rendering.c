@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rendering.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/05 16:36:05 by aeleimat          #+#    #+#             */
+/*   Updated: 2025/11/05 16:36:20 by aeleimat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 /**
@@ -52,7 +64,6 @@ void	draw_vertical_line(mlx_image_t *img, int x, int y1, int y2, uint32_t color)
 		y1 = y2;
 		y2 = y;
 	}
-	
 	y = y1;
 	while (y <= y2)
 	{
@@ -75,8 +86,6 @@ void	render_floor_ceiling(t_game *game)
 		game->floor_color.b, 255);
 	ceiling_color = get_rgba(game->ceiling_color.r, game->ceiling_color.g,
 		game->ceiling_color.b, 255);
-
-	// Draw ceiling (top half)
 	y = 0;
 	while (y < WIN_HEIGHT / 2)
 	{
@@ -88,8 +97,6 @@ void	render_floor_ceiling(t_game *game)
 		}
 		y++;
 	}
-
-	// Draw floor (bottom half)
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
@@ -107,9 +114,6 @@ void	render_floor_ceiling(t_game *game)
  */
 void	render_frame(t_game *game)
 {
-	// Clear screen and draw floor/ceiling
 	render_floor_ceiling(game);
-	
-	// Perform raycasting to draw walls
 	raycast(game);
 }

@@ -1,11 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/05 14:37:08 by aeleimat          #+#    #+#             */
+/*   Updated: 2025/11/05 16:32:48 by aeleimat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
-/*
-P2A:
-Parse command line arguments to
-make sure there is exactly one argument (the .cub file)
-check that the file has a .cub extension
-*/
 int parse_arguments(int argc, char **argv)
 {
     char *extension;
@@ -24,10 +30,6 @@ int parse_arguments(int argc, char **argv)
     return (1);
 }
 
-// Phase 2B: File Reading & Basic Parsing
-/*
-Helper function to add a line to the content array
-*/
 static char **add_line_to_content(char **content, char *line, int line_count)
 {
     char **temp;
@@ -55,9 +57,6 @@ static char **add_line_to_content(char **content, char *line, int line_count)
     return (temp);
 }
 
-/*
-Read file and store content in array
-*/
 char **read_file(char *filename)
 {
     int fd;
@@ -92,11 +91,6 @@ char **read_file(char *filename)
     return (content);
 }
 
-/*
-Phase 2B: File Reading & Basic Parsing
-- Read the .cub file line by line
-- Store each line in a dynamically allocated array of strings in the game structure
-*/
 int parse_file(char *filename, t_game *game)
 {
     game->file_content = read_file(filename);
@@ -106,7 +100,6 @@ int parse_file(char *filename, t_game *game)
     return (1);
 }
 
-// Utility function to free string array
 void free_array(char **array)
 {
     int i;
@@ -123,19 +116,15 @@ void free_array(char **array)
     free(array);
 }
 
-// Clean up game resources
 void cleanup_game(t_game *game)
 {
     int i;
     
     if (!game)
         return;
-    
-    // Free file content
     if (game->file_content)
         free_array(game->file_content);
     
-    // Free texture paths
     i = 0;
     while (i < 4)
     {
@@ -146,13 +135,10 @@ void cleanup_game(t_game *game)
         }
         i++;
     }
-    
-    // Free map grid
     if (game->map.grid)
         free_array(game->map.grid);
 }
 
-// Error handling
 void error_exit(char *message)
 {
     printf("%s", message);
