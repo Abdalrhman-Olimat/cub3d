@@ -50,3 +50,5 @@ fclean: clean
 	make fclean -C Libft
 
 re: fclean all
+
+.PHONY: all clean fclean re
