@@ -30,7 +30,6 @@ $(addprefix $(OBJ_PATH), $(HELPERS_OBJ)): $(OBJ_PATH)%.o: $(HELPERS_PATH)%.c
 $(OBJ_PATH):
 	mkdir $(OBJ_PATH)
 
-
 MLX42_LIB = MLX42/build/libmlx42.a
 MLX42_INC = -IMLX42/include
 MLX42_FLAGS = -ldl -lglfw -pthread -lm

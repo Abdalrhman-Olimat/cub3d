@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   mlx_init.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/12/28 00:24:30 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2023/06/08 18:16:19 by XEDGit        ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 00:24:30 by W2Wizard          #+#    #+#             */
+/*   Updated: 2025/11/07 21:14:58 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,9 +171,9 @@ mlx_t* mlx_init(int32_t width, int32_t height, const char* title, bool resize)
 	mlx_t* mlx;
 	if (!(init = glfwInit()))
 		return ((void*)mlx_error(MLX_GLFWFAIL));
-	if (!(mlx = calloc(1, sizeof(mlx_t))))
+	if (!(mlx = ft_calloc(1, sizeof(mlx_t))))
 		return ((void*)mlx_error(MLX_MEMFAIL));
-	if (!(mlx->context = calloc(1, sizeof(mlx_ctx_t))))
+	if (!(mlx->context = ft_calloc(1, sizeof(mlx_ctx_t))))
 		return (free(mlx), (void*)mlx_error(MLX_MEMFAIL));
 
 	mlx_ctx_t* const mlxctx = mlx->context;

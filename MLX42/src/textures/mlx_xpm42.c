@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   mlx_xpm42.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/12/28 03:42:29 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/06/27 19:58:33 by lde-la-h      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   mlx_xpm42.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 03:42:29 by W2Wizard          #+#    #+#             */
+/*   Updated: 2025/11/07 21:14:58 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ static bool mlx_read_xpm_header(xpm_t* xpm, FILE *file)
 		!(xpm->mode == 'c' || xpm->mode == 'm') || xpm->cpp > 10)
 		return (false);
 	xpm->texture.bytes_per_pixel = BPP;
-	xpm->texture.pixels = calloc(xpm->texture.width * xpm->texture.height, sizeof(int32_t));
+	xpm->texture.pixels = ft_calloc(xpm->texture.width * xpm->texture.height, sizeof(int32_t));
 	return (xpm->texture.pixels != NULL ? mlx_read_table(xpm, file) : false);
 }
 
@@ -188,7 +188,7 @@ xpm_t* mlx_load_xpm42(const char* path)
 		return ((void*)mlx_error(MLX_INVEXT));
 	if (!(file = fopen(path, "r")))
 		return ((void*)mlx_error(MLX_INVFILE));
-	if (!(xpm = calloc(1, sizeof(xpm_t))))
+	if (!(xpm = ft_calloc(1, sizeof(xpm_t))))
 		return ((void*)mlx_error(MLX_MEMFAIL));
 	if (!mlx_read_xpm_header(xpm, file))
 	{

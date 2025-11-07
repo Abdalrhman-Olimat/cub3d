@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   mlx_images.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/12/28 02:29:06 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2023/03/30 16:36:39 by ntamayo-      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   mlx_images.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/28 02:29:06 by W2Wizard          #+#    #+#             */
+/*   Updated: 2025/11/07 21:14:58 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int32_t mlx_image_to_window(mlx_t* mlx, mlx_image_t* img, int32_t x, int32_t y)
 	img->count++;
 	bool did_realloc;
 	mlx_instance_t* instances = mlx_grow_instances(img, &did_realloc);
-	draw_queue_t* queue = calloc(1, sizeof(draw_queue_t));
+	draw_queue_t* queue = ft_calloc(1, sizeof(draw_queue_t));
 	if (!instances || !queue)
 	{
 		if (did_realloc)
@@ -166,8 +166,8 @@ mlx_image_t* mlx_new_image(mlx_t* mlx, uint32_t width, uint32_t height)
 		return ((void*)mlx_error(MLX_INVDIM));
 
 	const mlx_ctx_t* mlxctx = mlx->context;
-	mlx_image_t* newimg = calloc(1, sizeof(mlx_image_t));
-	mlx_image_ctx_t* newctx = calloc(1, sizeof(mlx_image_ctx_t));
+	mlx_image_t* newimg = ft_calloc(1, sizeof(mlx_image_t));
+	mlx_image_ctx_t* newctx = ft_calloc(1, sizeof(mlx_image_ctx_t));
 	if (!newimg || !newctx)
 	{
 		mlx_freen(2, newimg, newctx);
@@ -177,7 +177,7 @@ mlx_image_t* mlx_new_image(mlx_t* mlx, uint32_t width, uint32_t height)
 	newimg->context = newctx;
 	(*(uint32_t*)&newimg->width) = width;
 	(*(uint32_t*)&newimg->height) = height;
-	if (!(newimg->pixels = calloc(width * height, sizeof(int32_t))))
+	if (!(newimg->pixels = ft_calloc(width * height, sizeof(int32_t))))
 	{
 		mlx_freen(2, newimg, newctx);
 		return ((void *)mlx_error(MLX_MEMFAIL));
@@ -233,7 +233,7 @@ bool mlx_resize_image(mlx_image_t* img, uint32_t nwidth, uint32_t nheight)
 		float wstep = (float)img->width / nwidth;
 		float hstep = (float)img->height / nheight;
 
-		uint8_t* tempbuff = calloc(nwidth * nheight, BPP);
+		uint8_t* tempbuff = ft_calloc(nwidth * nheight, BPP);
 		if (!tempbuff)
 			return (mlx_error(MLX_MEMFAIL));
 		img->pixels = tempbuff;
