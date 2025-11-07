@@ -174,6 +174,23 @@ void	cleanup_game(t_game *game);
 void	error_exit(char *message);
 char	*skip_whitespace(char *str);
 
+// File reading helper functions
+char	**add_line_to_content(char **content, char *line, int line_count);
+int		open_file_fd(char *filename);
+int		process_file_lines(int fd, char ***content);
+int		validate_file_content(int line_count);
+
+// Texture parsing helper functions
+void	trim_trailing_whitespace(char *str);
+int		validate_texture_file_access(char *path_start);
+int		validate_texture_extension(char *path_start);
+
+// Color parsing helper functions
+int		validate_rgb(int r, int g, int b);
+int		parse_rgb_values(char **rgb_split, t_color *color);
+int		validate_textures_and_colors(int texture_count, int floor_set,
+			int ceiling_set);
+
 // Game initialization
 int		init_game(t_game *game);
 void	init_player(t_game *game);
@@ -191,7 +208,7 @@ void	render_frame(t_game *game);
 void	render_floor_ceiling(t_game *game);
 void	put_pixel(mlx_image_t *img, int x, int y, uint32_t color);
 void	clear_image(mlx_image_t *img, uint32_t color);
-void	draw_vertical_line(mlx_image_t *img, int x, int y1, int y2, uint32_t color);
+
 uint32_t	get_rgba(int r, int g, int b, int a);
 
 // Game loop functions
