@@ -141,20 +141,10 @@ int		flood_fill_check(t_game *game, char **visited, int x, int y);
 // Map parsing helper functions
 int		find_map_start(t_game *game);
 void	calculate_map_dimensions(t_game *game, int map_start);
-int		validate_and_setup_map(t_game *game, int *map_start);
-int		allocate_map_grid(t_game *game);
-int		populate_map_grid(t_game *game, int map_start);
-void	cleanup_grid_on_error(t_game *game, int current_row);
-int		validate_and_set_char(t_game *game, char *line, int i, int j);
-int		populate_row_chars(t_game *game, char *line, int i);
+int		allocate_and_fill_grid(t_game *game, int map_start);
 
 // Player helper functions
-void	set_player_data(t_game *game, int j, int i, char orientation);
-int		validate_player_count(int player_count);
-void	set_north_orientation(t_game *game);
-void	set_south_orientation(t_game *game);
-void	set_east_orientation(t_game *game);
-void	set_west_orientation(t_game *game);
+void	init_player(t_game *game);
 
 // Wall check helper functions
 char	**allocate_visited_array(t_game *game);
@@ -193,7 +183,6 @@ int		validate_textures_and_colors(int texture_count, int floor_set,
 
 // Game initialization
 int		init_game(t_game *game);
-void	init_player(t_game *game);
 
 // Graphics functions
 int		init_graphics(t_game *game);

@@ -6,8 +6,8 @@ HELPERS_PATH = src/Helpers/
 OBJ_PATH = obj/
 SRC = main.c parsing.c texture_color_parsing.c map_parsing.c \
       graphics_init.c rendering.c game_loop.c raycasting.c input.c
-HELPERS = input_helper.c map_parsing_helper.c map_validation_helper.c \
-	  map_grid_helper.c player_helper.c player_orientation_helper.c \
+HELPERS = input_helper.c map_parsing_core.c map_validation_helper.c \
+	  map_grid_helper.c map_grid_alloc.c player_finder.c player_init.c \
 	  wall_check_helper.c flood_fill_logic_helper.c file_reading_helpers.c \
 	  utility_helpers.c texture_parsing_helpers.c color_parsing_helpers.c \
 	  texture_color_main_parsing.c rendering_helpers.c rendering_floor_ceiling.c \

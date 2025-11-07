@@ -1,23 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_helper.c                               :+:      :+:    :+:   */
+/*   map_parsing_core.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 16:40:01 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/11/07 14:59:02 by ahmad            ###   ########.fr       */
+/*   Created: 2025/11/07 16:00:00 by ahmad             #+#    #+#             */
+/*   Updated: 2025/11/07 15:29:17 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
-/*
- * map_parsing_helper.c functions are now provided by src/map_parsing.c
- * (working implementation). Disable these definitions here to avoid
- * duplicate symbol errors at link time. Kept for reference.
- */
+#include "../../include/cub3d.h"
 
-#if 0
 int	is_valid_map_char(char c)
 {
 	return (c == WALL || c == EMPTY || c == NORTH || c == SOUTH
@@ -29,13 +23,13 @@ int	is_player_char(char c)
 	return (c == NORTH || c == SOUTH || c == EAST || c == WEST);
 }
 
-int	is_texture_or_color_line(char *line)
+static int	is_texture_or_color(char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0
-		|| ft_strncmp(line, "SO ", 3) == 0
-		|| ft_strncmp(line, "WE ", 3) == 0
-		|| ft_strncmp(line, "EA ", 3) == 0
-		|| line[0] == 'F' || line[0] == 'C')
+	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0)
+		return (1);
+	if (ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
+		return (1);
+	if (line[0] == 'F' || line[0] == 'C')
 		return (1);
 	return (0);
 }
@@ -54,7 +48,7 @@ int	find_map_start(t_game *game)
 			i++;
 			continue ;
 		}
-		if (is_texture_or_color_line(line))
+		if (is_texture_or_color(line))
 		{
 			i++;
 			continue ;
@@ -85,4 +79,3 @@ void	calculate_map_dimensions(t_game *game, int map_start)
 	}
 	game->map.width = max_width;
 }
-#endif

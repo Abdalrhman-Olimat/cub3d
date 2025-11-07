@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_helper.c                                    :+:      :+:    :+:   */
+/*   player_finder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 11:45:00 by ahmad             #+#    #+#             */
-/*   Updated: 2025/11/07 14:59:02 by ahmad            ###   ########.fr       */
+/*   Created: 2025/11/07 16:00:00 by ahmad             #+#    #+#             */
+/*   Updated: 2025/11/07 15:29:17 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-/*
- * Duplicate player helper implementations were moved into src/map_parsing.c
- * to match the working project's authoritative implementation. Wrap the
- * old definitions so they are not compiled to avoid duplicate symbols.
- */
 
-#if 0
-void	set_player_data(t_game *game, int j, int i, char orientation)
+static void	set_player_position(t_game *game, int j, int i)
 {
 	game->player.x = (double)j + 0.5;
 	game->player.y = (double)i + 0.5;
-	game->player.orientation = orientation;
+	game->player.orientation = game->map.grid[i][j];
 	game->map.grid[i][j] = EMPTY;
 }
 
-int	validate_player_count(int player_count)
+static int	validate_player_count(int count)
 {
-	if (player_count == 0)
+	if (count == 0)
 	{
 		printf("Error\nNo player starting position found\n");
 		return (0);
 	}
-	if (player_count > 1)
+	if (count > 1)
 	{
 		printf("Error\nMultiple player starting positions found\n");
 		return (0);
@@ -56,7 +50,7 @@ int	find_player(t_game *game)
 		{
 			if (is_player_char(game->map.grid[i][j]))
 			{
-				set_player_data(game, j, i, game->map.grid[i][j]);
+				set_player_position(game, j, i);
 				player_count++;
 			}
 			j++;
@@ -65,20 +59,3 @@ int	find_player(t_game *game)
 	}
 	return (validate_player_count(player_count));
 }
-
-void	set_north_orientation(t_game *game)
-{
-	game->player.dir_x = 0;
-	game->player.dir_y = -1;
-	game->player.plane_x = 0.66;
-	game->player.plane_y = 0;
-}
-
-void	set_south_orientation(t_game *game)
-{
-	game->player.dir_x = 0;
-	game->player.dir_y = 1;
-	game->player.plane_x = -0.66;
-	game->player.plane_y = 0;
-}
-#endif
