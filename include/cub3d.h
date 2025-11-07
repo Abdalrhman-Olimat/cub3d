@@ -128,8 +128,44 @@ int		validate_rgb(int r, int g, int b);
 // Map validation
 int		is_valid_map_char(char c);
 int		is_player_char(char c);
+int		is_texture_or_color_line(char *line);
 int		find_player(t_game *game);
 int		check_walls(t_game *game);
+int		is_wall_or_void(t_game *game, int x, int y);
+int		has_adjacent_space(t_game *game, int x, int y);
+void	free_visited(char **visited, int height);
+int		validate_visited_cell(t_game *game, char **visited, int i, int j);
+void	mark_reachable_floors(t_game *game, char **visited, int x, int y);
+int		flood_fill_check(t_game *game, char **visited, int x, int y);
+
+// Map parsing helper functions
+int		find_map_start(t_game *game);
+void	calculate_map_dimensions(t_game *game, int map_start);
+int		validate_and_setup_map(t_game *game, int *map_start);
+int		allocate_map_grid(t_game *game);
+int		populate_map_grid(t_game *game, int map_start);
+void	cleanup_grid_on_error(t_game *game, int current_row);
+int		validate_and_set_char(t_game *game, char *line, int i, int j);
+int		populate_row_chars(t_game *game, char *line, int i);
+
+// Player helper functions
+void	set_player_data(t_game *game, int j, int i, char orientation);
+int		validate_player_count(int player_count);
+void	set_north_orientation(t_game *game);
+void	set_south_orientation(t_game *game);
+void	set_east_orientation(t_game *game);
+void	set_west_orientation(t_game *game);
+
+// Wall check helper functions
+char	**allocate_visited_array(t_game *game);
+int		validate_all_visited_cells(t_game *game, char **visited);
+void	cleanup_visited_array(char **visited, int height);
+
+// Flood fill logic helper functions
+int		is_boundary_position(t_game *game, int x, int y);
+int		flood_fill_recursive_calls(t_game *game, char **visited, int x, int y);
+int		handle_space_cell(t_game *game, char **visited, int x, int y);
+int		handle_empty_cell(t_game *game, char **visited, int x, int y);
 
 // Utility functions
 char	**read_file(char *filename);

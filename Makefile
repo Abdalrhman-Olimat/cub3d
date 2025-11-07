@@ -6,7 +6,9 @@ HELPERS_PATH = src/Helpers/
 OBJ_PATH = obj/
 SRC = main.c parsing.c texture_color_parsing.c map_parsing.c \
       graphics_init.c rendering.c game_loop.c raycasting.c input.c
-HELPERS = input_helper.c
+HELPERS = input_helper.c map_parsing_helper.c map_validation_helper.c \
+	  map_grid_helper.c player_helper.c player_orientation_helper.c \
+	  wall_check_helper.c flood_fill_logic_helper.c
 LIBFT = Libft/libft.a
 INCS	= -I ./include/ -IMLX42/include
 SRCS	= $(addprefix $(SRC_PATH), $(SRC)) $(addprefix $(HELPERS_PATH), $(HELPERS))
