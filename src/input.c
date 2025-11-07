@@ -6,7 +6,7 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:26:10 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/11/07 10:44:12 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/07 10:58:41 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	strafe_right(t_game *game, double move_speed)
 	if (is_valid_position(game, game->player.x, new_y))
 		game->player.y = new_y;
 }
-
 
 /**
  * Handle all player input
