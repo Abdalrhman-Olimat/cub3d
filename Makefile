@@ -2,18 +2,24 @@ NAME = cub3D
 CC = cc
 CFLAG = -Wall -Werror -Wextra
 SRC_PATH = src/
+HELPERS_PATH = src/Helpers/
 OBJ_PATH = obj/
 SRC = main.c parsing.c texture_color_parsing.c map_parsing.c \
       graphics_init.c rendering.c game_loop.c raycasting.c input.c
+HELPERS = input_helper.c
 LIBFT = Libft/libft.a
 INCS	= -I ./include/ -IMLX42/include
-SRCS	= $(addprefix $(SRC_PATH), $(SRC))
+SRCS	= $(addprefix $(SRC_PATH), $(SRC)) $(addprefix $(HELPERS_PATH), $(HELPERS))
 OBJ		= $(SRC:.c=.o)
-OBJS	= $(addprefix $(OBJ_PATH), $(OBJ))
+HELPERS_OBJ = $(HELPERS:.c=.o)
+OBJS	= $(addprefix $(OBJ_PATH), $(OBJ)) $(addprefix $(OBJ_PATH), $(HELPERS_OBJ))
 
 all: $(OBJ_PATH) $(NAME) 
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	$(CC) -c $< -o $@ $(INCS)
+
+$(addprefix $(OBJ_PATH), $(HELPERS_OBJ)): $(OBJ_PATH)%.o: $(HELPERS_PATH)%.c
 	$(CC) -c $< -o $@ $(INCS)
 
 $(OBJ_PATH):

@@ -1,0 +1,384 @@
+.
+├── cub3d_project.md
+├── IMPLEMENTATION_DOCS.md
+├── include
+│   └── cub3d.h
+├── invalid_colors.cub
+├── invalid_map.cub
+├── Libft
+│   ├── ft_atoi.c
+│   ├── ft_bzero.c
+│   ├── ft_calloc.c
+│   ├── ft_isalnum.c
+│   ├── ft_isalpha.c
+│   ├── ft_isascii.c
+│   ├── ft_isdigit.c
+│   ├── ft_isprint.c
+│   ├── ft_itoa.c
+│   ├── ft_memchr.c
+│   ├── ft_memcmp.c
+│   ├── ft_memcpy.c
+│   ├── ft_memmove.c
+│   ├── ft_memset.c
+│   ├── ft_putchar_fd.c
+│   ├── ft_putendl_fd.c
+│   ├── ft_putnbr_fd.c
+│   ├── ft_putstr_fd.c
+│   ├── ft_split.c
+│   ├── ft_strchr.c
+│   ├── ft_strdup.c
+│   ├── ft_striteri.c
+│   ├── ft_strjoin.c
+│   ├── ft_strlcat.c
+│   ├── ft_strlcpy.c
+│   ├── ft_strlen.c
+│   ├── ft_strmapi.c
+│   ├── ft_strncmp.c
+│   ├── ft_strnstr.c
+│   ├── ft_strrchr.c
+│   ├── ft_strtrim.c
+│   ├── ft_substr.c
+│   ├── ft_tolower.c
+│   ├── ft_toupper.c
+│   ├── get_next_line.c
+│   ├── get_next_line_utils.c
+│   ├── libft.h
+│   └── Makefile
+├── Makefile
+├── maps
+│   ├── invalid
+│   │   ├── color_duplicates.cub
+│   │   ├── color_invalid_rgb.cub
+│   │   ├── color_missing_ceiling_rgb.cub
+│   │   ├── color_missing.cub
+│   │   ├── color_missing_floor_rgb.cub
+│   │   ├── color_none.cub
+│   │   ├── empty.cub
+│   │   ├── f.cub
+│   │   ├── filetype_missing
+│   │   ├── filetype_wrong.buc
+│   │   ├── hole_in_wall.cub
+│   │   ├── incomplete_color.cub
+│   │   ├── invalid_char.cub
+│   │   ├── invalid_color_high.cub
+│   │   ├── invalid_color_negative.cub
+│   │   ├── map_first.cub
+│   │   ├── map_middle.cub
+│   │   ├── map_missing.cub
+│   │   ├── map_only.cub
+│   │   ├── map_too_small.cub
+│   │   ├── missing_ceiling.cub
+│   │   ├── missing_texture.cub
+│   │   ├── missing_texture_def.cub
+│   │   ├── multiple_players.cub
+│   │   ├── no_player.cub
+│   │   ├── open_map.cub
+│   │   ├── player_multiple.cub
+│   │   ├── player_none.cub
+│   │   ├── player_on_edge.cub
+│   │   ├── test_map_hole.cub
+│   │   ├── textures_dir.cub
+│   │   ├── textures_duplicates.cub
+│   │   ├── textures_invalid.cub
+│   │   ├── textures_missing.cub
+│   │   ├── textures_none.cub
+│   │   ├── textures_not_xpm.cub
+│   │   ├── wall_hole_east.cub
+│   │   ├── wall_hole_north.cub
+│   │   ├── wall_hole_south.cub
+│   │   ├── wall_hole_west.cub
+│   │   ├── wall_none.cub
+│   │   └── works.cub
+│   └── valid
+│       ├── cheese_maze.cub
+│       ├── complex_maze.cub
+│       ├── creepy.cub
+│       ├── dungeon.cub
+│       ├── east_facing.cub
+│       ├── extra_spaces.cub
+│       ├── library.cub
+│       ├── matrix.cub
+│       ├── minimal_map.cub
+│       ├── sad_face.cub
+│       ├── simple_square.cub
+│       ├── square_map.cub
+│       ├── subject_map.cub
+│       ├── test_graphics.cub
+│       ├── test_map.cub
+│       ├── test_pos_bottom.cub
+│       ├── test_pos_left.cub
+│       ├── test_pos_right.cub
+│       ├── test_pos_top.cub
+│       ├── test_textures.cub
+│       └── test_whitespace.cub
+├── MEMORY_LEAK_FIX.md
+├── missing_texture.cub
+├── MLX42
+│   ├── build
+│   │   ├── CMakeCache.txt
+│   │   ├── CMakeFiles
+│   │   │   ├── 3.28.3
+│   │   │   │   ├── CMakeCCompiler.cmake
+│   │   │   │   ├── CMakeCXXCompiler.cmake
+│   │   │   │   ├── CMakeDetermineCompilerABI_C.bin
+│   │   │   │   ├── CMakeDetermineCompilerABI_CXX.bin
+│   │   │   │   ├── CMakeSystem.cmake
+│   │   │   │   ├── CompilerIdC
+│   │   │   │   │   ├── a.out
+│   │   │   │   │   └── CMakeCCompilerId.c
+│   │   │   │   └── CompilerIdCXX
+│   │   │   │       ├── a.out
+│   │   │   │       └── CMakeCXXCompilerId.cpp
+│   │   │   ├── cmake.check_cache
+│   │   │   ├── CMakeConfigureLog.yaml
+│   │   │   ├── CMakeDirectoryInformation.cmake
+│   │   │   ├── CMakeRuleHashes.txt
+│   │   │   ├── Makefile2
+│   │   │   ├── Makefile.cmake
+│   │   │   ├── mlx42.dir
+│   │   │   │   ├── build.make
+│   │   │   │   ├── cmake_clean.cmake
+│   │   │   │   ├── cmake_clean_target.cmake
+│   │   │   │   ├── compiler_depend.make
+│   │   │   │   ├── compiler_depend.ts
+│   │   │   │   ├── DependInfo.cmake
+│   │   │   │   ├── depend.make
+│   │   │   │   ├── flags.make
+│   │   │   │   ├── lib
+│   │   │   │   │   ├── glad
+│   │   │   │   │   │   ├── glad.c.o
+│   │   │   │   │   │   └── glad.c.o.d
+│   │   │   │   │   └── png
+│   │   │   │   │       ├── lodepng.c.o
+│   │   │   │   │       └── lodepng.c.o.d
+│   │   │   │   ├── link.txt
+│   │   │   │   ├── mlx_frag_shader.c.o
+│   │   │   │   ├── mlx_frag_shader.c.o.d
+│   │   │   │   ├── mlx_vert_shader.c.o
+│   │   │   │   ├── mlx_vert_shader.c.o.d
+│   │   │   │   ├── progress.make
+│   │   │   │   └── src
+│   │   │   │       ├── font
+│   │   │   │       │   ├── mlx_font.c.o
+│   │   │   │       │   └── mlx_font.c.o.d
+│   │   │   │       ├── mlx_cursor.c.o
+│   │   │   │       ├── mlx_cursor.c.o.d
+│   │   │   │       ├── mlx_exit.c.o
+│   │   │   │       ├── mlx_exit.c.o.d
+│   │   │   │       ├── mlx_images.c.o
+│   │   │   │       ├── mlx_images.c.o.d
+│   │   │   │       ├── mlx_init.c.o
+│   │   │   │       ├── mlx_init.c.o.d
+│   │   │   │       ├── mlx_keys.c.o
+│   │   │   │       ├── mlx_keys.c.o.d
+│   │   │   │       ├── mlx_loop.c.o
+│   │   │   │       ├── mlx_loop.c.o.d
+│   │   │   │       ├── mlx_monitor.c.o
+│   │   │   │       ├── mlx_monitor.c.o.d
+│   │   │   │       ├── mlx_mouse.c.o
+│   │   │   │       ├── mlx_mouse.c.o.d
+│   │   │   │       ├── mlx_put_pixel.c.o
+│   │   │   │       ├── mlx_put_pixel.c.o.d
+│   │   │   │       ├── mlx_window.c.o
+│   │   │   │       ├── mlx_window.c.o.d
+│   │   │   │       ├── textures
+│   │   │   │       │   ├── mlx_png.c.o
+│   │   │   │       │   ├── mlx_png.c.o.d
+│   │   │   │       │   ├── mlx_texture.c.o
+│   │   │   │       │   ├── mlx_texture.c.o.d
+│   │   │   │       │   ├── mlx_xpm42.c.o
+│   │   │   │       │   └── mlx_xpm42.c.o.d
+│   │   │   │       └── utils
+│   │   │   │           ├── mlx_compare.c.o
+│   │   │   │           ├── mlx_compare.c.o.d
+│   │   │   │           ├── mlx_error.c.o
+│   │   │   │           ├── mlx_error.c.o.d
+│   │   │   │           ├── mlx_list.c.o
+│   │   │   │           ├── mlx_list.c.o.d
+│   │   │   │           ├── mlx_utils.c.o
+│   │   │   │           └── mlx_utils.c.o.d
+│   │   │   ├── progress.marks
+│   │   │   └── TargetDirectories.txt
+│   │   ├── cmake_install.cmake
+│   │   ├── libmlx42.a
+│   │   ├── Makefile
+│   │   ├── mlx_frag_shader.c
+│   │   └── mlx_vert_shader.c
+│   ├── cmake
+│   │   ├── Findglfw3.cmake
+│   │   └── LinkGLFW.cmake
+│   ├── CMakeLists.txt
+│   ├── CODE_OF_CONDUCT.md
+│   ├── CONTRIBUTING.md
+│   ├── docs
+│   │   ├── 42.md
+│   │   ├── assets
+│   │   │   ├── demo.gif
+│   │   │   └── logo.png
+│   │   ├── Basics.md
+│   │   ├── Colors.md
+│   │   ├── Functions.md
+│   │   ├── Hooks.md
+│   │   ├── Images.md
+│   │   ├── index.md
+│   │   ├── Input.md
+│   │   ├── Shaders.md
+│   │   ├── Textures.md
+│   │   └── XPM42.md
+│   ├── include
+│   │   ├── glad
+│   │   │   └── glad.h
+│   │   ├── KHR
+│   │   │   └── khrplatform.h
+│   │   ├── lodepng
+│   │   │   └── lodepng.h
+│   │   └── MLX42
+│   │       ├── MLX42.h
+│   │       └── MLX42_Int.h
+│   ├── lib
+│   │   ├── glad
+│   │   │   └── glad.c
+│   │   └── png
+│   │       └── lodepng.c
+│   ├── LICENSE
+│   ├── README.md
+│   ├── SECURITY.md
+│   ├── shaders
+│   │   ├── default.frag
+│   │   └── default.vert
+│   ├── src
+│   │   ├── font
+│   │   │   ├── font.h
+│   │   │   └── mlx_font.c
+│   │   ├── mlx_cursor.c
+│   │   ├── mlx_exit.c
+│   │   ├── mlx_images.c
+│   │   ├── mlx_init.c
+│   │   ├── mlx_keys.c
+│   │   ├── mlx_loop.c
+│   │   ├── mlx_monitor.c
+│   │   ├── mlx_mouse.c
+│   │   ├── mlx_put_pixel.c
+│   │   ├── mlx_window.c
+│   │   ├── textures
+│   │   │   ├── mlx_png.c
+│   │   │   ├── mlx_texture.c
+│   │   │   └── mlx_xpm42.c
+│   │   └── utils
+│   │       ├── mlx_compare.c
+│   │       ├── mlx_error.c
+│   │       ├── mlx_list.c
+│   │       └── mlx_utils.c
+│   ├── tests
+│   │   ├── CMakeLists.txt
+│   │   ├── tests.cpp
+│   │   └── WindowFixture.hpp
+│   ├── tools
+│   │   ├── compile_shader.bat
+│   │   ├── compile_shader.sh
+│   │   └── xpm3_conv.py
+│   └── web
+│       ├── coi-serviceworker.js
+│       ├── demo.js
+│       ├── demo.wasm
+│       ├── index.html
+│       └── README.md
+├── obj
+│   ├── game_loop.o
+│   ├── graphics_init.o
+│   ├── input.o
+│   ├── main.o
+│   ├── map_parsing.o
+│   ├── parsing.o
+│   ├── raycasting.o
+│   ├── rendering.o
+│   └── texture_color_parsing.o
+├── path_to_east_texture.xpm
+├── path_to_north_texture.xpm
+├── path_to_south_texture.xpm
+├── path_to_west_texture.xpm
+├── PHASE3_COMPLETE.md
+├── PHASE4_COMPLETE.md
+├── PHASE5_COMPLETE.md
+├── plan.md
+├── PROJECT_COMPLETE.md
+├── README.md
+├── src
+│   ├── game_loop.c
+│   ├── graphics_init.c
+│   ├── Helpers
+│   │   └── input_helper.c
+│   ├── input.c
+│   ├── main.c
+│   ├── map_parsing.c
+│   ├── parsing.c
+│   ├── raycasting.c
+│   ├── rendering.c
+│   └── texture_color_parsing.c
+├── test2.sh
+├── test_core.sh
+├── test.cub
+├── test_maps.sh
+├── textures
+│   ├── door.png
+│   ├── gybe.png
+│   ├── matrix.png
+│   ├── moon
+│   │   ├── moon_frame_00.png
+│   │   ├── moon_frame_01.png
+│   │   ├── moon_frame_02.png
+│   │   ├── moon_frame_03.png
+│   │   └── moon_frame_04.png
+│   ├── path_to
+│   │   ├── path_to_east_texture.xpm
+│   │   ├── path_to_north_texture.xpm
+│   │   ├── path_to_south_texture.xpm
+│   │   └── path_to_west_texture.xpm
+│   ├── simonkraft
+│   │   ├── basalt_top.png
+│   │   ├── bookshelf_01.png
+│   │   ├── bookshelf_02.png
+│   │   ├── bookshelf_03.png
+│   │   ├── bookshelf.png
+│   │   ├── cobblestone_01.png
+│   │   ├── cobblestone_02.png
+│   │   ├── cobblestone.png
+│   │   ├── cyan_concrete.png
+│   │   ├── mossy_cobblestone1.png
+│   │   ├── mossy_cobblestone2.png
+│   │   ├── mossy_cobblestone.png
+│   │   ├── mycelium_top.png
+│   │   ├── netherrack_01.png
+│   │   ├── netherrack_02.png
+│   │   ├── netherrack.png
+│   │   ├── respawn_anchor_side0.png
+│   │   ├── respawn_anchor_side1.png
+│   │   ├── respawn_anchor_side2.png
+│   │   ├── respawn_anchor_side3.png
+│   │   ├── respawn_anchor_side4.png
+│   │   ├── soul_sand.png
+│   │   ├── soul_soil_01.png
+│   │   ├── soul_soil.png
+│   │   ├── warped_nylium.png
+│   │   ├── warped_planks.png
+│   │   └── wet_sponge.png
+│   ├── test
+│   │   ├── east.png
+│   │   ├── forbidden.png
+│   │   ├── north
+│   │   ├── north.png
+│   │   ├── south.png
+│   │   └── west.png
+│   └── wolfenstein
+│       ├── blue_stone.png
+│       ├── color_stone.png
+│       ├── eagle.png
+│       ├── grey_stone.png
+│       ├── mossy.png
+│       ├── purple_stone.png
+│       ├── red_brick.png
+│       └── wood.png
+├── tree_structure
+└── VALIDATION_SUMMARY.md
+
+48 directories, 334 files
