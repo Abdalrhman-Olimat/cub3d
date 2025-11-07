@@ -6,7 +6,7 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:26:10 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/11/07 15:23:03 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/07 15:46:05 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	handle_input(t_game *game)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		strafe_right(game, move_speed);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-		rotate_left(game, rot_speed);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 		rotate_right(game, rot_speed);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		rotate_left(game, rot_speed);
 }
