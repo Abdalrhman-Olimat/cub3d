@@ -6,12 +6,18 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 11:45:00 by ahmad             #+#    #+#             */
-/*   Updated: 2025/11/07 11:48:11 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/07 14:59:02 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+/*
+ * These functions are now provided by src/map_parsing.c (the working
+ * implementation was restored there). Wrap the old definitions so they
+ * are not compiled and avoid duplicate symbol definitions.
+ */
 
+#if 0
 void	set_east_orientation(t_game *game)
 {
 	game->player.dir_x = 1;
@@ -52,3 +58,4 @@ int	validate_map(t_game *game)
 	}
 	return (1);
 }
+#endif

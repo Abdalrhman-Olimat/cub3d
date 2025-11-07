@@ -6,12 +6,18 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 16:40:01 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/11/07 11:48:40 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/07 14:59:02 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+/*
+ * map_parsing_helper.c functions are now provided by src/map_parsing.c
+ * (working implementation). Disable these definitions here to avoid
+ * duplicate symbol errors at link time. Kept for reference.
+ */
 
+#if 0
 int	is_valid_map_char(char c)
 {
 	return (c == WALL || c == EMPTY || c == NORTH || c == SOUTH
@@ -79,3 +85,4 @@ void	calculate_map_dimensions(t_game *game, int map_start)
 	}
 	game->map.width = max_width;
 }
+#endif

@@ -6,7 +6,7 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 16:15:00 by ahmad             #+#    #+#             */
-/*   Updated: 2025/11/07 14:35:29 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/07 15:17:31 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ int	get_texture_index(t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->step_x > 0)
-			return (0);
+			return (3); // East texture (EA)
 		else
-			return (1);
+			return (2); // West texture (WE)
 	}
 	else
 	{
 		if (ray->step_y > 0)
-			return (2);
+			return (1); // South texture (SO)
 		else
-			return (3);
+			return (0); // North texture (NO)
 	}
 }

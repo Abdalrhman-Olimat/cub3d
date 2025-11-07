@@ -6,12 +6,18 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 11:45:00 by ahmad             #+#    #+#             */
-/*   Updated: 2025/11/07 11:48:35 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/07 14:59:02 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+/*
+ * Duplicate player helper implementations were moved into src/map_parsing.c
+ * to match the working project's authoritative implementation. Wrap the
+ * old definitions so they are not compiled to avoid duplicate symbols.
+ */
 
+#if 0
 void	set_player_data(t_game *game, int j, int i, char orientation)
 {
 	game->player.x = (double)j + 0.5;
@@ -75,3 +81,4 @@ void	set_south_orientation(t_game *game)
 	game->player.plane_x = -0.66;
 	game->player.plane_y = 0;
 }
+#endif
