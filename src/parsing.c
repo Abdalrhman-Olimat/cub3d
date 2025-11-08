@@ -6,7 +6,7 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:37:08 by aeleimat          #+#    #+#             */
-/*   Updated: 2025/11/07 14:17:33 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/08 09:43:34 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	parse_arguments(int argc, char **argv)
 {
 	char	*extension;
+	int		len;
 
 	if (argc != 2)
 	{
@@ -22,7 +23,13 @@ int	parse_arguments(int argc, char **argv)
 		return (0);
 	}
 	extension = ft_strrchr(argv[1], '.');
-	if (!extension || ft_strncmp(extension, ".cub", 4) != 0)
+	if (!extension)
+	{
+		printf(ERR_FILE_EXT);
+		return (0);
+	}
+	len = ft_strlen(extension);
+	if (len != 4 || ft_strncmp(extension, ".cub", 4) != 0)
 	{
 		printf(ERR_FILE_EXT);
 		return (0);
