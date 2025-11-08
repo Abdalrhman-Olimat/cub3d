@@ -23,13 +23,8 @@ int	parse_rgb_values(char **rgb_split, t_color *color)
 	int	g;
 	int	b;
 
-	if (!rgb_split || !rgb_split[0] || !rgb_split[1] || !rgb_split[2]
-		|| rgb_split[3])
-	{
-		free_array(rgb_split);
-		printf("Error\nColor must have exactly 3 RGB values\n");
+	if (!validate_rgb_array(rgb_split))
 		return (0);
-	}
 	r = ft_atoi(rgb_split[0]);
 	g = ft_atoi(rgb_split[1]);
 	b = ft_atoi(rgb_split[2]);
@@ -38,20 +33,21 @@ int	parse_rgb_values(char **rgb_split, t_color *color)
 		printf("Error\nRGB values must be in range [0,255]\n");
 		return (0);
 	}
-	color->r = r;
-	color->g = g;
-	color->b = b;
-	return (1);
+	return (set_color_values(color, r, g, b));
 }
 
-int	validate_textures_and_colors(int texture_count, int floor_set,
-		int ceiling_set)
+static int	check_texture_count(int texture_count)
 {
 	if (texture_count != 4)
 	{
 		printf("Error\nMissing texture definitions (need NO, SO, WE, EA)\n");
 		return (0);
 	}
+	return (1);
+}
+
+static int	check_floor_ceiling(int floor_set, int ceiling_set)
+{
 	if (!floor_set)
 	{
 		printf("Error\nMissing floor color definition (F)\n");
@@ -62,5 +58,15 @@ int	validate_textures_and_colors(int texture_count, int floor_set,
 		printf("Error\nMissing ceiling color definition (C)\n");
 		return (0);
 	}
+	return (1);
+}
+
+int	validate_textures_and_colors(int texture_count, int floor_set,
+		int ceiling_set)
+{
+	if (!check_texture_count(texture_count))
+		return (0);
+	if (!check_floor_ceiling(floor_set, ceiling_set))
+		return (0);
 	return (1);
 }

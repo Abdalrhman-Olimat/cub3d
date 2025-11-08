@@ -5,13 +5,15 @@ SRC_PATH = src/
 HELPERS_PATH = src/Helpers/
 OBJ_PATH = obj/
 SRC = main.c parsing.c texture_color_parsing.c map_parsing.c \
-      graphics_init.c rendering.c game_loop.c raycasting.c input.c
+      graphics_init.c rendering.c game_loop.c raycasting.c input.c \
+      raycasting22.c
 HELPERS = input_helper.c map_parsing_core.c map_validation_helper.c \
 	  map_grid_helper.c map_grid_alloc.c player_finder.c player_init.c \
 	  wall_check_helper.c flood_fill_logic_helper.c file_reading_helpers.c \
 	  utility_helpers.c texture_parsing_helpers.c color_parsing_helpers.c \
 	  texture_color_main_parsing.c rendering_helpers.c rendering_floor_ceiling.c \
-	  raycasting_helpers.c raycasting_texture_helpers.c raycasting2.c
+	  raycasting_helpers.c raycasting_texture_helpers.c color_validation.c \
+	  texture_line_handlers.c
 LIBFT = Libft/libft.a
 INCS	= -I ./include/ -IMLX42/include
 SRCS	= $(addprefix $(SRC_PATH), $(SRC)) $(addprefix $(HELPERS_PATH), $(HELPERS))

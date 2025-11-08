@@ -169,6 +169,15 @@ int		validate_texture_extension(char *path_start);
 int		parse_rgb_values(char **rgb_split, t_color *color);
 int		validate_textures_and_colors(int texture_count, int floor_set,
 			int ceiling_set);
+int		is_valid_color_char(char c);
+int		validate_color_string(char *rgb_start);
+char	*get_rgb_start(char *line);
+int		validate_rgb_array(char **rgb_split);
+int		set_color_values(t_color *color, int r, int g, int b);
+int		handle_texture_line(char *line, t_game *game, int *texture_count);
+int		handle_texture_line2(char *line, t_game *game, int *texture_count);
+int		handle_color_line(char *line, t_game *game, int *floor_set,
+			int *ceiling_set);
 
 int		init_game(t_game *game);
 

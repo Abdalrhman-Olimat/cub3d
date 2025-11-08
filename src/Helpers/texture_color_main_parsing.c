@@ -12,72 +12,25 @@
 
 #include "../../include/cub3d.h"
 
-static int	handle_texture_line(char *line, t_game *game, int *texture_count)
+static int	is_valid_config_line(char *line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-	{
-		if (game->textures[0].path)
-			return (printf("Error\nDuplicate texture definition: NO\n"), 0);
-		if (!parse_texture(line, &game->textures[0], "NO"))
-			return (0);
-		(*texture_count)++;
-	}
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-	{
-		if (game->textures[1].path)
-			return (printf("Error\nDuplicate texture definition: SO\n"), 0);
-		if (!parse_texture(line, &game->textures[1], "SO"))
-			return (0);
-		(*texture_count)++;
-	}
-	return (1);
-}
-
-static int	handle_texture_line2(char *line, t_game *game, int *texture_count)
-{
-	if (ft_strncmp(line, "WE ", 3) == 0)
-	{
-		if (game->textures[2].path)
-			return (printf("Error\nDuplicate texture definition: WE\n"), 0);
-		if (!parse_texture(line, &game->textures[2], "WE"))
-			return (0);
-		(*texture_count)++;
-	}
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-	{
-		if (game->textures[3].path)
-			return (printf("Error\nDuplicate texture definition: EA\n"), 0);
-		if (!parse_texture(line, &game->textures[3], "EA"))
-			return (0);
-		(*texture_count)++;
-	}
-	return (1);
-}
-
-static int	handle_color_line(char *line, t_game *game, int *floor_set,
-		int *ceiling_set)
-{
-	if (line[0] == 'F' && (line[1] == ' ' || line[1] == '\t'))
-	{
-		if (*floor_set)
-			return (printf("Error\nDuplicate floor color definition\n"), 0);
-		if (!parse_color(line, &game->floor_color, 'F'))
-			return (0);
-		*floor_set = 1;
-	}
-	else if (line[0] == 'C' && (line[1] == ' ' || line[1] == '\t'))
-	{
-		if (*ceiling_set)
-			return (printf("Error\nDuplicate ceiling color definition\n"), 0);
-		if (!parse_color(line, &game->ceiling_color, 'C'))
-			return (0);
-		*ceiling_set = 1;
-	}
-	return (1);
+	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0)
+		return (1);
+	if (ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0)
+		return (1);
+	if ((line[0] == 'F' || line[0] == 'C')
+		&& (line[1] == ' ' || line[1] == '\t'))
+		return (1);
+	return (0);
 }
 
 static int	process_single_line(char *line, t_game *game, int *counters)
 {
+	if (!is_valid_config_line(line))
+	{
+		printf("Error\nInvalid configuration line: %s\n", line);
+		return (0);
+	}
 	if (!handle_texture_line(line, game, &counters[0])
 		|| !handle_texture_line2(line, game, &counters[0])
 		|| !handle_color_line(line, game, &counters[1], &counters[2]))

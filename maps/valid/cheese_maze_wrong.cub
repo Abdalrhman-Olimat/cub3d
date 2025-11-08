@@ -1,10 +1,15 @@
 NO textures/simonkraft/wet_sponge.png
-SO textures/simonkraft/wet_sponge.png
-WE textures/simonkraft/wet_sponge.png
+SO textures/simonkraft/wet_sponge.png randomText
+WE textures/simonkraft/wet_sponge.png randomText
 EA textures/simonkraft/wet_sponge.png
 
-F  164,169, 20 
-C  153,204,255
+
+randomText
+
+F  randomText 164,169, 20
+C  randomText 153,204,255
+
+randomText
 
 111111111111111111111
 101000001000000000001
@@ -28,3 +33,4 @@ C  153,204,255
 1N1000001000000000001
 111111111111111111111
 
+randomText

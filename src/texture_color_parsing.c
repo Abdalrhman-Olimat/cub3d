@@ -16,6 +16,7 @@ static char	*extract_texture_path(char *line, char *identifier)
 {
 	char	*ptr;
 	char	*path_start;
+	char	*end_check;
 
 	ptr = line + ft_strlen(identifier);
 	ptr = skip_whitespace(ptr);
@@ -24,6 +25,12 @@ static char	*extract_texture_path(char *line, char *identifier)
 	path_start = ptr;
 	while (*ptr && *ptr != ' ' && *ptr != '\t' && *ptr != '\n')
 		ptr++;
+	end_check = skip_whitespace(ptr);
+	if (*end_check && *end_check != '\n')
+	{
+		printf("Error\nExtra text after texture path\n");
+		return (NULL);
+	}
 	*ptr = '\0';
 	return (path_start);
 }
@@ -53,19 +60,15 @@ int	parse_texture(char *line, t_texture *texture, char *identifier)
 
 int	parse_color(char *line, t_color *color, char identifier)
 {
-	char	*ptr;
 	char	*rgb_start;
 	char	**rgb_split;
 	int		result;
 
-	ptr = line + 1;
-	ptr = skip_whitespace(ptr);
-	if (!*ptr)
-	{
-		printf(ERR_COLOR);
+	rgb_start = get_rgb_start(line);
+	if (!rgb_start)
 		return (0);
-	}
-	rgb_start = ptr;
+	if (!validate_color_string(rgb_start))
+		return (0);
 	trim_trailing_whitespace(rgb_start);
 	rgb_split = ft_split(rgb_start, ',');
 	result = parse_rgb_values(rgb_split, color);
