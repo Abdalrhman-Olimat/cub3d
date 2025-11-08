@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 19:36:40 by ahmad             #+#    #+#             */
-/*   Updated: 2025/11/08 08:51:28 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/08 17:25:16 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,5 +207,6 @@ void	strafe_right(t_game *game, double move_speed);
 void	rotate_left(t_game *game, double rot_speed);
 void	rotate_right(t_game *game, double rot_speed);
 t_ui32	get_rgba(int r, int g, int b, int a);
+void	draw_pixel(t_ray *ray, t_game *game, int x, int y);
 
 #endif

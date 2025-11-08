@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aeleimat <aeleimat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 15:30:00 by ahmad             #+#    #+#             */
-/*   Updated: 2025/11/08 08:56:49 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/08 17:22:29 by aeleimat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ void	cast_ray(t_game *game, int x)
 {
 	t_ray		ray;
 	int			y;
-	int			tex_y;
 	uint32_t	color;
-	uint8_t		*pixel;
 
 	init_ray(game, &ray, x);
 	calculate_step(game, &ray);
@@ -97,14 +95,7 @@ void	cast_ray(t_game *game, int x)
 	y = ray.draw_start;
 	while (y < ray.draw_end)
 	{
-		tex_y = (int)ray.tex_pos & (ray.texture->height - 1);
-		ray.tex_pos += ray.step_tex;
-		pixel = &ray.texture->pixels[(tex_y * ray.texture->width + ray.tex_x)
-			* 4];
-		color = get_rgba(pixel[0], pixel[1], pixel[2], pixel[3]);
-		if (ray.side == 1)
-			color = (color >> 1) & 0x7F7F7F7F;
-		put_pixel(game->img, x, y, color);
+		draw_pixel(&ray, game, x, y);
 		y++;
 	}
 }

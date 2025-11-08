@@ -11,7 +11,7 @@ HELPERS = input_helper.c map_parsing_core.c map_validation_helper.c \
 	  wall_check_helper.c flood_fill_logic_helper.c file_reading_helpers.c \
 	  utility_helpers.c texture_parsing_helpers.c color_parsing_helpers.c \
 	  texture_color_main_parsing.c rendering_helpers.c rendering_floor_ceiling.c \
-	  raycasting_helpers.c raycasting_texture_helpers.c
+	  raycasting_helpers.c raycasting_texture_helpers.c raycasting2.c
 LIBFT = Libft/libft.a
 INCS	= -I ./include/ -IMLX42/include
 SRCS	= $(addprefix $(SRC_PATH), $(SRC)) $(addprefix $(HELPERS_PATH), $(HELPERS))
