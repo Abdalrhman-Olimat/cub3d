@@ -6,7 +6,7 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 19:36:40 by ahmad             #+#    #+#             */
-/*   Updated: 2025/11/07 19:44:12 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/08 08:51:28 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/types.h>
-# include <sys/stat.h>
 # include "../Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 

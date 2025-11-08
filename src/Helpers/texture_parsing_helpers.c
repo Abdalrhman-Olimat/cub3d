@@ -6,7 +6,7 @@
 /*   By: ahmad <ahmad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 15:00:00 by ahmad             #+#    #+#             */
-/*   Updated: 2025/11/07 14:27:18 by ahmad            ###   ########.fr       */
+/*   Updated: 2025/11/08 08:51:26 by ahmad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,19 @@ void	trim_trailing_whitespace(char *str)
 
 int	validate_texture_file_access(char *path_start)
 {
-	struct stat	file_stat;
+	int		fd;
+	char	buffer[1];
+	int		read_result;
 
-	if (access(path_start, R_OK) != 0)
+	fd = open(path_start, O_RDONLY);
+	if (fd == -1)
 	{
 		printf("Error\nTexture file not accessible: %s\n", path_start);
 		return (0);
 	}
-	if (stat(path_start, &file_stat) != 0 || !S_ISREG(file_stat.st_mode))
+	read_result = read(fd, buffer, 1);
+	close(fd);
+	if (read_result == -1)
 	{
 		printf("Error\nTexture path is not a regular file: %s\n", path_start);
 		return (0);
